@@ -12,27 +12,10 @@
 </head>
 
 <body class="container">
-  <h1 class="mt-5">MiniChat</h1>
+  <h1 class="mt-5">Bands</h1>
   <hr>
 
-  <form id="miForm">
-    <div class="row">
-      <div class="col-8">
-        <input type="text" class="form-control" id="txtMensaje" placeholder="Mensaje">
-      </div>
-      <div class="col-4">
-        <button class="btn btn-primary">Enviar</button>
-      </div>
-    </div>
-  </form>
 
-
-  <div class="row">
-    <div class="col">
-      <ul id="misMensajes" class="mt-2">
-      </ul>
-    </div>
-  </div>
 
 
 
@@ -45,24 +28,10 @@
   <script>
     const socket = io('http://localhost:8080');
 
-    // Referencias a los elementos del DOM
-    const formulario = document.querySelector('#miForm');
-    const mensajes = document.querySelector('#misMensajes');
-    const txtMensaje = document.querySelector('#txtMensaje');
-
-    formulario.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      const newMessage = txtMensaje.value;
-
-      socket.emit('message-to-server', {
-        text: newMessage
-      });
-    });
-
-    socket.on('message-from-server', (data) => {
-      mensajes.innerHTML += `<li>${data.text}</li>`;
-    });
+    //  Obtener las bandas
+    socket.on('current-bands', (data) => {
+      console.log(data);
+    })
   </script>
 </body>
 
