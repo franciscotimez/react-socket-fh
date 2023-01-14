@@ -31,11 +31,13 @@ function App() {
 
   useEffect(() => {
     socket.on('current-bands', (bands) => {
-      console.log(bands);
       setBands(bands);
     });
   }, [socket]);
 
+  const votar = (id) => {
+    socket.emit('votar-banda', id);
+  };
 
   return (
     <div className="container">
@@ -57,7 +59,10 @@ function App() {
 
       <div className="row">
         <div className="col-8">
-          <BandList data={bands} />
+          <BandList
+            data={bands}
+            votar={votar}
+          />
         </div>
 
         <div className="col-4">

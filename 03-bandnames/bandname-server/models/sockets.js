@@ -17,13 +17,12 @@ class Sockets {
 
       // Emitir al cliente conectado todas las bandas
       socket.emit('current-bands', this.bandList.getBands());
-      
-      // // Escucho evento emitido desde el cliente
-      // socket.on('message-to-server', (data) => {
-      //   console.log("El cliente dijo -> ", data);
 
-      //   this.io.emit('message-from-server', data);
-      // });
+      // votar por la banda
+      socket.on('votar-banda', (id) => {
+        this.bandList.increaseVotes(id);
+        this.io.emit('current-bands', this.bandList.getBands());
+      });
     });
   }
 
