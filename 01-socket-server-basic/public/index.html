@@ -30,7 +30,6 @@
   <div class="row">
     <div class="col">
       <ul id="misMensajes" class="mt-2">
-        <li>mensaje</li>
       </ul>
     </div>
   </div>
@@ -47,19 +46,23 @@
     const socket = io('http://localhost:8080');
 
     // Referencias a los elementos del DOM
-    const formulario = document.querySelector('#miForm')
-    const mensajes = document.querySelector('#misMensajes')
+    const formulario = document.querySelector('#miForm');
+    const mensajes = document.querySelector('#misMensajes');
+    const txtMensaje = document.querySelector('#txtMensaje');
 
-    socket.on('mensaje-bienvenida', (data) => {
-      console.log("el servidor emitio -> ", data);
+    formulario.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const newMessage = txtMensaje.value;
+
+      socket.emit('message-to-server', {
+        text: newMessage
+      });
     });
 
-    setTimeout(() => {
-      socket.emit('mensaje-cliente', {
-        msg: 'cliente',
-        name: 'Francisco'
-      });
-    }, 2000)
+    socket.on('message-from-server', (data) => {
+      mensajes.innerHTML += `<li>${data.text}</li>`;
+    });
   </script>
 </body>
 

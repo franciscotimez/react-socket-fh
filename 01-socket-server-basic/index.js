@@ -13,15 +13,11 @@ app.use(express.static(__dirname + '/public'));
 
 io.on('connection', (socket) => {
 
-  // Emito un evento desde el servidor
-  socket.emit('mensaje-bienvenida', {
-    msg: 'Bienvenido al server',
-    fecha: new Date()
-  });
-
   // Escucho evento emitido desde el cliente
-  socket.on('mensaje-cliente', (data) => {
+  socket.on('message-to-server', (data) => {
     console.log("El cliente dijo -> ", data);
+
+    io.emit('message-from-server', data)
   });
 });
 
