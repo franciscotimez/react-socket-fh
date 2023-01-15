@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniChat</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body class="container">
+  <h1 class="mt-5">MiniChat</h1>
+  <hr>
+
+  <form id="miForm">
+    <div class="row">
+      <div class="col-8">
+        <input type="text" class="form-control" id="txtMensaje" placeholder="Mensaje">
+      </div>
+      <div class="col-4">
+        <button class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="row">
+    <div class="col">
+      <ul id="misMensajes" class="mt-2">
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"
+    integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    const socket = io('http://localhost:8080');
+
+    // Referencias a los elementos del DOM
+    const formulario = document.querySelector('#miForm');
+    const mensajes = document.querySelector('#misMensajes');
+    const txtMensaje = document.querySelector('#txtMensaje');
+
+    formulario.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const newMessage = txtMensaje.value;
+
+      socket.emit('message-to-server', {
+        text: newMessage
+      });
+    });
+
+    socket.on('message-from-server', (data) => {
+      mensajes.innerHTML += `<li>${data.text}</li>`;
+    });
+  </script>
+</body>
+
+</html>
