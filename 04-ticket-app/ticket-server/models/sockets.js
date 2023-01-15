@@ -29,6 +29,8 @@ class Sockets {
         const ticketAsignado = this.ticketList.asignarTicket(agente, escritorio);
         console.log("Ticket asignado => ", ticketAsignado);
         callback(ticketAsignado);
+
+        this.io.emit('ticket-asignado', this.ticketList.ultimos13);
       });
 
     });
