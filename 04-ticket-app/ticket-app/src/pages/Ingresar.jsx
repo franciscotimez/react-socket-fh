@@ -1,9 +1,7 @@
 import React from 'react';
-import { Button, Divider, Form, Input, InputNumber, Typography } from 'antd';
-import {
-  SaveOutlined
-} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { Button, Divider, Form, Input, InputNumber, Typography } from 'antd';
+import { SaveOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
