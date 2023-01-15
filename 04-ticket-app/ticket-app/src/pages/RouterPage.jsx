@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   UploadOutlined,
@@ -11,9 +11,12 @@ import { Ingresar } from './Ingresar';
 import { Cola } from './Cola';
 import { CrearTicket } from './CrearTicket';
 import { Escritorio } from './Escritorio';
+import { UiContext } from '../context/UiContext';
 const { Sider, Content } = Layout;
 
 export const RouterPage = () => {
+
+  const { ocultarMenu } = useContext(UiContext);
 
   const {
     token: { colorBgContainer },
@@ -25,6 +28,7 @@ export const RouterPage = () => {
         <Sider
           collapsedWidth='0'
           breakpoint='md'
+          hidden={ocultarMenu}
         >
           <div className="logo" />
           <Menu

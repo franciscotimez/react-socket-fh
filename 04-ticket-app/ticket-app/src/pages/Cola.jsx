@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Card, Col, Divider, List, Row, Tag, Typography } from 'antd';
+import { useHideMenu } from '../hooks/useHideMenu';
 
 const { Title, Text } = Typography;
 
@@ -43,6 +44,9 @@ const data = [
 ];
 
 export const Cola = () => {
+
+  useHideMenu(true)
+
   return (
     <>
       <Title level={1}>Atendiendo al Cliente</Title>
