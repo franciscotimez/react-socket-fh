@@ -1,3 +1,4 @@
+const Ticket = require("./ticket");
 
 
 class TicketList {
