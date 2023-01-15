@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
@@ -13,10 +11,9 @@ import { Ingresar } from './Ingresar';
 import { Cola } from './Cola';
 import { CrearTicket } from './CrearTicket';
 import { Escritorio } from './Escritorio';
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 export const RouterPage = () => {
-  const [collapsed, setCollapsed] = useState(false);
 
   const {
     token: { colorBgContainer },
@@ -25,7 +22,10 @@ export const RouterPage = () => {
   return (
     <BrowserRouter>
       <Layout style={{ height: '100vh' }}>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
+        <Sider
+          collapsedWidth='0'
+          breakpoint='md'
+        >
           <div className="logo" />
           <Menu
             theme="dark"
@@ -51,17 +51,6 @@ export const RouterPage = () => {
           />
         </Sider>
         <Layout className="site-layout">
-          <Header
-            style={{
-              padding: 0,
-              background: colorBgContainer,
-            }}
-          >
-            {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: () => setCollapsed(!collapsed),
-            })}
-          </Header>
           <Content
             style={{
               margin: '24px 16px',
@@ -76,7 +65,7 @@ export const RouterPage = () => {
               <Route path="/crear" element={<CrearTicket />} />
 
               <Route path="/escritorio" element={<Escritorio />} />
-              
+
               <Route path="/*" element={<Navigate to="/ingresar" />} />
             </Routes>
           </Content>
