@@ -18,6 +18,9 @@ class Server {
 
     // Configuraciones de sockets
     this.io = socketio(this.server, {/** Configuraciones */ });
+
+    // Inicializar Sockets
+    this.sockets = new Sockets(this.io);
   }
 
   middlewares() {
@@ -26,18 +29,19 @@ class Server {
 
     // Habilito CORS
     this.app.use(cors());
-  }
 
-  configurarSockets() {
-    new Sockets(this.io);
+    // Get de los ultimos tickets
+    this.app.get('/api/ultimos13', (req, res) => {
+      res.json({
+        ok: true,
+        tickets: this.sockets.ticketList.ultimos13
+      });
+    });
   }
 
   execute() {
     // Inicializar middlewares
     this.middlewares();
-
-    // Inicializar Sockets
-    this.configurarSockets();
 
     // Inicializar Server
     this.server.listen(this.port, () => {
