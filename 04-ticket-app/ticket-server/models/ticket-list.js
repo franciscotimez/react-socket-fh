@@ -36,6 +36,7 @@ class TicketList {
     siguienteTicket.escritorio = escritorio;
 
     this.asignados.unshift(siguienteTicket);
+    return siguienteTicket;
   }
 }
 

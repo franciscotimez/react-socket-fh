@@ -23,8 +23,14 @@ class Sockets {
         const nuevoTicket = this.ticketList.crearTicket();
         console.log("Nuevo ticket Backend => ", nuevoTicket);
         callback(nuevoTicket);
-
       });
+
+      socket.on('siguiente-ticket', ({ agente, escritorio }, callback) => {
+        const ticketAsignado = this.ticketList.asignarTicket(agente, escritorio);
+        console.log("Ticket asignado => ", ticketAsignado);
+        callback(ticketAsignado);
+      });
+
     });
   }
 
