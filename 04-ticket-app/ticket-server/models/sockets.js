@@ -12,6 +12,8 @@ class Sockets {
     // on connection
     this.io.on('connection', (socket) => {
 
+      console.log("Cliente conectado => ", socket.id);
+
       // Escucho evento emitido desde el cliente
       socket.on('message-to-server', (data) => {
         console.log("El cliente dijo -> ", data);
