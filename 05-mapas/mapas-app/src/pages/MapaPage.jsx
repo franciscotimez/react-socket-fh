@@ -14,14 +14,14 @@ export const MapaPage = () => {
 
   useEffect(() => {
     nuevoMarcador$.subscribe(marcador => {
-      console.log(marcador);
+      // console.log(marcador);
       // todo: emitir nuevo marcador
     });
   }, [nuevoMarcador$]);
 
   useEffect(() => {
     movimientoMarcador$.subscribe(marcador => {
-      console.log(marcador);
+      // console.log(marcador);
       // todo: emitir marcador movido
     });
   }, [movimientoMarcador$]);
