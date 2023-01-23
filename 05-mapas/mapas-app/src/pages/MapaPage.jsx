@@ -12,7 +12,8 @@ const puntoInicial = {
 export const MapaPage = () => {
 
   const mapaDiv = useRef();
-  const [mapa, setMapa] = useState();
+  // const [mapa, setMapa] = useState();
+  const mapa = useRef();
   const [coords, setCoords] = useState(puntoInicial);
 
   useEffect(() => {
@@ -23,22 +24,22 @@ export const MapaPage = () => {
       zoom: puntoInicial.zoom, // starting zoom
     });
 
-    setMapa(map);
+    mapa.current = map;
   }, []);
 
   useEffect(() => {
-    mapa?.on('move', () => {
-      const { lng, lat } = mapa.getCenter();
+    mapa.current?.on('move', () => {
+      const { lng, lat } = mapa.current.getCenter();
       setCoords({
         lng: lng.toFixed(4),
         lat: lat.toFixed(4),
-        zoom: mapa.getZoom().toFixed(4)
+        zoom: mapa.current.getZoom().toFixed(4)
       });
     });
     return () => {
-      mapa?.off('move');
+      mapa.current?.off('move');
     };
-  }, [mapa]);
+  }, []);
 
 
   return (
