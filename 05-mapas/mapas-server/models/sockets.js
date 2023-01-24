@@ -26,8 +26,12 @@ class Sockets {
         socket.broadcast.emit('marcador-nuevo', marcador);
       });
 
-      // todo: marcador-actualizado
-
+      // marcador-actualizado
+      socket.on('marcador-actualizado', (marcador) => {
+        console.log("Marcador updated -> ", marcador);
+        this.marcadores.actualizarMarcador(marcador);
+        socket.broadcast.emit('marcador-actualizado', marcador);
+      });
 
     });
   }
