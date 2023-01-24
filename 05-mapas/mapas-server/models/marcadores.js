@@ -6,7 +6,7 @@ class Marcadores {
   }
 
   agregarMarcador(marcador) {
-    this.activos[marcador.id] = { marcador };
+    this.activos[marcador.id] = marcador;
     return marcador;
   }
 
@@ -15,7 +15,7 @@ class Marcadores {
   }
 
   actualizarMarcador(marcador) {
-    this.activos[marcador.id] = { marcador };
+    this.activos[marcador.id] = marcador;
   }
 }
 
