@@ -1,7 +1,4 @@
-
-
 class Sockets {
-
   constructor(io) {
     this.io = io;
 
@@ -10,17 +7,15 @@ class Sockets {
 
   socketsEvents() {
     // on connection
-    this.io.on('connection', (socket) => {
-
+    this.io.on("connection", (socket) => {
       // Escucho evento emitido desde el cliente
-      socket.on('message-to-server', (data) => {
+      socket.on("message-to-server", (data) => {
         console.log("El cliente dijo -> ", data);
 
-        this.io.emit('message-from-server', data);
+        this.io.emit("message-from-server", data);
       });
     });
   }
-
 }
 
 module.exports = Sockets;
