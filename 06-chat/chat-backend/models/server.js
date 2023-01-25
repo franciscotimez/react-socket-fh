@@ -32,8 +32,11 @@ class Server {
     // Habilito CORS
     this.app.use(cors());
 
+    // Parseo del body
+    this.app.use(express.json());
+    
     // API endpoints
-    this.app.use('/api/login', require('../router/auth'))
+    this.app.use("/api/login", require("../router/auth"));
   }
 
   configurarSockets() {
