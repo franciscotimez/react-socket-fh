@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChatSelect } from '../components/ChatSelect';
 import { InboxPeople } from '../components/InboxPeople';
 import { Messages } from '../components/Messages';
 
@@ -11,14 +12,10 @@ export const ChatPage = () => {
 
         <InboxPeople />
 
-
-        {/* <!-- Chat inicio --> */}
-        <Messages />
-        {/* <!-- Chat Fin --> */}
+        <ChatSelect />
+        {/* <Messages /> */}
 
       </div>
-
-
     </div>
   );
 };
