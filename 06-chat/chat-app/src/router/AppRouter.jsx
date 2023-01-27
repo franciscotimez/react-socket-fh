@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
+import { AuthRouter } from './AuthRouter';
 import { PrivateRoute } from './PrivateRoute';
-import { PublicRoute } from './PublicRoute';
 
 export const AppRouter = () => {
 
@@ -20,8 +20,9 @@ export const AppRouter = () => {
       {
         (auth.logged)
           ? <Route path="/*" element={<PrivateRoute />} />
-          : <Route path="/auth/*" element={<PublicRoute />} />
+          : <Route path="/auth/*" element={<AuthRouter />} />
       }
+      <Route path="/*" element={<Navigate to="/auth/login" />} />
     </Routes>
   );
 };

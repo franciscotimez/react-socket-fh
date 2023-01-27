@@ -94,7 +94,16 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  const logout = () => {};
+  const logout = () => {
+    localStorage.removeItem("token");
+    setAuth({
+      uid: null,
+      checking: false,
+      logged: false,
+      name: null,
+      email: null,
+    });
+  };
 
   return (
     <AuthContext.Provider
