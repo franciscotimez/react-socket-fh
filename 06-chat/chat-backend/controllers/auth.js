@@ -30,6 +30,7 @@ const crearUsuario = async (req = request, res = response) => {
     const token = await generarJWT(newUser.uid);
 
     res.json({
+      ok: true,
       user: newUser,
       token,
     });

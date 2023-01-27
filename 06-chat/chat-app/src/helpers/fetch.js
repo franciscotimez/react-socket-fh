@@ -17,3 +17,29 @@ export const fetchSinToken = async (endpoint, data, method = "GET") => {
     return await resp.json();
   }
 };
+
+
+export const fetchConToken = async (endpoint, data, method = "GET") => {
+  const url = `${baseUrl}${endpoint}`;
+
+  const token = localStorage.getItem('token') || undefined
+
+  if (method === "GET") {
+    const resp = await fetch(url,{
+      headers: {
+        "x-token": token,
+      },
+    });
+    return await resp.json();
+  } else {
+    const resp = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": token,
+      },
+      body: JSON.stringify(data),
+    });
+    return await resp.json();
+  }
+};

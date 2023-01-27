@@ -1,25 +1,27 @@
-import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { ChatPage } from '../pages/ChatPage';
-import { AuthRouter } from './AuthRouter';
+import React, { useContext, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { AuthContext } from '../auth/AuthContext';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 export const AppRouter = () => {
+
+  const { auth, verificaToken } = useContext(AuthContext);
+
+  useEffect(() => {
+    verificaToken();
+  }, [verificaToken]);
+
+  if (auth.checking) {
+    return <h1>Espere por favor</h1>;
+  }
   return (
     <Routes>
-      <Route path="/auth/*" element={<AuthRouter />} />
-      <Route path="/" element={<ChatPage />} />
-      <Route path="/*" element={<Navigate to="/" />} />
-
-      {/* {
-      (status === "auth-ok")
-        ? <Route path="/*" element={<JournalRoutes />} />
-        : <Route path="/auth/*" element={<AuthRoutes />} />
-    }
-    <Route path="/*" element={<Navigate to="/auth/login"/>} /> */}
-      {/* Login y Registro */}
-      {/* <Route path="/auth/*" element={<AuthRoutes />} /> */}
-      {/* JournalApp */}
-      {/* <Route path="/*" element={<JournalRoutes />} /> */}
+      {
+        (auth.logged)
+          ? <Route path="/*" element={<PrivateRoute />} />
+          : <Route path="/auth/*" element={<PublicRoute />} />
+      }
     </Routes>
   );
 };
