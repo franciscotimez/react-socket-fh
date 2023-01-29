@@ -37,6 +37,8 @@ class Sockets {
       // Manejar el Disconect
       socket.on("disconnect", async () => {
         await usuarioDesconectado(uid);
+        this.io.emit("lista-usuarios", await getUsuarios());
+
         console.log("Cliente desconectado => ", uid);
       });
     });
