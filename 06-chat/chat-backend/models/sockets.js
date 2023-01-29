@@ -1,4 +1,8 @@
-const { usuarioConectado, usuarioDesconectado } = require("../controllers/sockets");
+const {
+  usuarioConectado,
+  usuarioDesconectado,
+  getUsuarios,
+} = require("../controllers/sockets");
 const { verificarJWT } = require("../helpers/jwt");
 
 class Sockets {
@@ -24,6 +28,7 @@ class Sockets {
       await usuarioConectado(uid);
 
       // todo: Emitir todos los usuarios conectados
+      this.io.emit("lista-usuarios", await getUsuarios());
 
       // todo: Socket join
 
