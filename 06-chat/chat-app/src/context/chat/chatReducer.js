@@ -35,6 +35,13 @@ export const chatReducer = (state, action) => {
         mensajes: action.payload,
       };
 
+    case chatTypes.resetChat:
+      return {
+        uid: "",
+        chatActivo: null,
+        usuarios: [],
+        mensajes: [],
+      };
     default:
       return state;
   }

@@ -1,5 +1,7 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
+import { ChatContext } from "../context/chat/ChatContext";
 import { fetchConToken, fetchSinToken } from "../helpers/fetch";
+import { chatTypes } from "../types/chatTypes";
 
 export const AuthContext = createContext();
 
@@ -13,6 +15,8 @@ const initialState = {
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(initialState);
+
+  const { dispatch: dispatchChat } = useContext(ChatContext);
 
   const login = async (email, password) => {
     const resp = await fetchSinToken("/login", { email, password }, "POST");
@@ -95,6 +99,10 @@ export const AuthProvider = ({ children }) => {
       logged: false,
       name: null,
       email: null,
+    });
+
+    dispatchChat({
+      type: chatTypes.resetChat,
     });
   };
 
