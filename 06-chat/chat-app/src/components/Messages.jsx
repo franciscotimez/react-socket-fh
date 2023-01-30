@@ -10,11 +10,13 @@ export const Messages = () => {
   const { chatState } = useContext(ChatContext);
   const { auth } = useContext(AuthContext);
 
-
   return (
     <div className="mesgs">
 
-      <div className="msg_history">
+      <div 
+      id='box-messages'
+      className="msg_history"
+      >
 
         {
           chatState.mensajes.map(msg => (

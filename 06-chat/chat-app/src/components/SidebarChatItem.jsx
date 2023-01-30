@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { ChatContext } from '../context/chat/ChatContext';
 import { fetchConToken } from '../helpers/fetch';
+import { scrollToBottom } from '../helpers/scrollToBottom';
 import { chatTypes } from '../types/chatTypes';
 
 export const SidebarChatItem = ({ usuario }) => {
@@ -8,20 +9,20 @@ export const SidebarChatItem = ({ usuario }) => {
   const { chatState, dispatch: dispatchChat } = useContext(ChatContext);
   const { chatActivo } = chatState;
 
-  const onClick = async() => {
+  const onClick = async () => {
     dispatchChat({
       type: chatTypes.activarChat,
       payload: usuario.uid
     });
 
     // Cargar los msg del chat
-    const resp = await fetchConToken(`/mensajes/${usuario.uid}`)
+    const resp = await fetchConToken(`/mensajes/${usuario.uid}`);
     dispatchChat({
       type: chatTypes.cargarMensajes,
       payload: resp.mensajes
     });
 
-    //  todo: scroll
+    scrollToBottom("box-messages");
   };
 
   return (
