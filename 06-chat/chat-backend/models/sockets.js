@@ -35,9 +35,11 @@ class Sockets {
       socket.join(uid);
 
       // Escuchar cuando un cliente manda un mensaje-personal
-      socket.on("mensaje-personal", async (payload) => {
+      socket.on("mensaje-personal", async (payload, callback) => {
         const mensaje = await grabarMensaje(payload);
-        console.log({mensaje})
+        this.io.to(payload.to).emit("mensaje-personal", mensaje);
+        this.io.to(payload.from).emit("mensaje-personal", mensaje);
+        // callback(mensaje);
       });
 
       // Manejar el Disconect

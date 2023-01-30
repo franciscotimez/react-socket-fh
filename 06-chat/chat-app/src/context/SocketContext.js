@@ -32,12 +32,23 @@ export const SocketProvider = ({ children }) => {
     socket?.on("lista-usuarios", (usuarios) => {
       dispatchChat({
         type: chatTypes.usuariosCargados,
-        payload: usuarios
-      })
+        payload: usuarios,
+      });
       console.log({ usuarios });
     });
   }, [socket, dispatchChat]);
 
+  // Escuchar nuevos mensajes
+  useEffect(() => {
+    socket?.on("mensaje-personal", (mensaje) => {
+      // dispatchChat({
+      //   type: chatTypes.usuariosCargados,
+      //   payload: usuarios
+      // })
+      console.log({ mensaje });
+    });
+  }, [socket]);
+  
   return (
     <SocketContext.Provider value={{ socket, online }}>
       {children}

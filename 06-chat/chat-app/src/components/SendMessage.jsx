@@ -19,7 +19,6 @@ export const SendMessage = () => {
 
     if (message.length === 0) { return; }
 
-    console.log(message);
     setMessage('');
 
     // emitir un evento de socket para enviar el msg 
