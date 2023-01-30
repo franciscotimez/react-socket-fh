@@ -2,6 +2,7 @@ const {
   usuarioConectado,
   usuarioDesconectado,
   getUsuarios,
+  grabarMensaje,
 } = require("../controllers/sockets");
 const { verificarJWT } = require("../helpers/jwt");
 
@@ -27,12 +28,17 @@ class Sockets {
       // Saber que usuario esta activo
       await usuarioConectado(uid);
 
-      // todo: Emitir todos los usuarios conectados
+      // Emitir todos los usuarios conectados
       this.io.emit("lista-usuarios", await getUsuarios());
 
-      // todo: Socket join
+      // Unir al usuario a una sala de socket.io
+      socket.join(uid);
 
-      // todo: Escuchar cuando un cliente manda un mensaje-personal
+      // Escuchar cuando un cliente manda un mensaje-personal
+      socket.on("mensaje-personal", async (payload) => {
+        const mensaje = await grabarMensaje(payload);
+        console.log({mensaje})
+      });
 
       // Manejar el Disconect
       socket.on("disconnect", async () => {

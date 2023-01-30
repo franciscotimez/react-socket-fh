@@ -6,7 +6,7 @@ const MensajeSchema = Schema(
     to: { type: Schema.Types.ObjectId, ref: "Usuario", required: true },
     message: { type: String, required: true },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 MensajeSchema.method("toJSON", function () {
