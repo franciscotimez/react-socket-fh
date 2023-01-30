@@ -41,14 +41,14 @@ export const SocketProvider = ({ children }) => {
   // Escuchar nuevos mensajes
   useEffect(() => {
     socket?.on("mensaje-personal", (mensaje) => {
-      // dispatchChat({
-      //   type: chatTypes.usuariosCargados,
-      //   payload: usuarios
-      // })
+      dispatchChat({
+        type: chatTypes.nuevoMensaje,
+        payload: mensaje
+      })
       console.log({ mensaje });
     });
-  }, [socket]);
-  
+  }, [socket, dispatchChat]);
+
   return (
     <SocketContext.Provider value={{ socket, online }}>
       {children}
